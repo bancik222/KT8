@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "================================"
+echo "POST-COMMIT: последние 3 коммита"
+echo "================================"
+
+git log -3 --oneline
+
+echo "================================"
+echo "Проверка C++ кода через Cppcheck"
+echo "================================"
+
+if [ -d "src" ]; then
+    cppcheck --enable=all --suppress=missingIncludeSystem src/
+else
+    echo "Папка src пока отсутствует"
+fi
+
+echo "Проверка завершена"
